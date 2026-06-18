@@ -8,8 +8,7 @@ from src.tools import (
     rag_search, rag_precheck,
     generate_report,
 )
-from src.config import LLM_MODEL
-from src.tools import _call_vllm
+from src.tools import _call_llm
 
 # ============================================================
 # Agent A：拓客助手
@@ -76,7 +75,7 @@ def run_policy_advisor(state: AgentState) -> AgentState:
 检索到的政策条文：{results}
 请生成带原文引用的回答。
 """
-    state["report"] = _call_vllm(LLM_MODEL, prompt)
+    state["report"] = _call_llm(prompt)
     state["report_generated"] = True
     state["next_action"] = "done"
     return state
